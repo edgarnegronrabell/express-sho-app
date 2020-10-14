@@ -3,4 +3,6 @@ coverage/
 node_modules/
 npm-debug.log
 package-lock.json
-test/*.log
+test/*.logsynthwave84
+.*.swp
+.*.swo

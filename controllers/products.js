@@ -1,4 +1,5 @@
 const Product = require('../models/product')
+const products = []
 
 exports.getAddProductPage = (req, res, next) => {
   res.render('add-product', {
@@ -12,7 +13,9 @@ exports.getAddProductPage = (req, res, next) => {
 }
 
 exports.postProduct = (req, res, next) => {
-  res.redirect('/')
+  	const product = new Product(req.body.title)
+	product.save()
+	res.redirect('/')
 }
 
 exports.getProducts = (req, res, next) => {
