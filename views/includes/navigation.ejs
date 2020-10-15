@@ -8,10 +8,29 @@
 			</div>
 			<div class="main-header__item">
 				<a 
+					class="<%= path === '/products' ? 'active' : '' %>" 
+					href="/products">Products</a>
+			</div>
+			<div class="main-header__item">
+				<a 
+					class="<%= path === '/cart' ? 'active' : '' %>" 
+					href="/cart">Cart</a>
+			</div>
+			<div class="main-header__item">
+				<a 
 					class="<%= path === '/admin/add-product' ? 'active' : '' %>" 
 					href="/admin/add-product">Add Product</a>
 			</div>
-
+			<div class="main-header__item">
+				<a 
+					class="<%= path === '/admin/add-product' ? 'active' : '' %>" 
+					href="/admin/add-product">Add Product</a>
+			</div>
+			<div class="main-header__item">
+				<a 
+					class="<%= path === '/admin/products' ? 'active' : '' %>" 
+					href="/admin/products">Admin Product</a>
+			</div>
 		</div>
 	</nav>
 </header>
