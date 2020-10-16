@@ -1,4 +1,6 @@
+<div class="backdrop"></div>
 <header class="main-header">
+	<button id="side-menu-toggle">Menu</button>
 	<nav class="main-header__nav">
 		<div class="main-header__item-list">
 			<div class="main-header__item">
@@ -16,6 +18,11 @@
 					class="<%= path === '/cart' ? 'active' : '' %>" 
 					href="/cart">Cart</a>
 			</div>
+			<div class="main-header__item">
+                                <a
+                                        class="<%= path === '/orders' ? 'active' : '' %>"
+                                        href="/orders">Orders</a>
+                        </div>
 			<div class="main-header__item">
 				<a 
 					class="<%= path === '/admin/add-product' ? 'active' : '' %>" 
