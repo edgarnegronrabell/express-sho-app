@@ -17,6 +17,7 @@ router.post('/add-product', adminController.postProduct)
 // /admin/edit-product => GET
 router.get('/edit-product/:productId', adminController.getEditProductPage)
 
-router.get('/edit-product', adminController.editProduct)
+router.post('/edit-product', adminController.editProduct)
 
+router.post('/delete-product/:productId', adminController.deleteProduct)
 module.exports = router
