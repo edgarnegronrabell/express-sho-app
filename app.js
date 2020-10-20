@@ -2,8 +2,9 @@ const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 
+require('dotenv').config()
 const errorsController = require('./controllers/errors')
-const db = require('./config/database')
+const sequelize = require('./config/database')
 
 const app = express()
 
@@ -24,4 +25,10 @@ app.use(errorsController.get404Page)
 
 const PORT = process.env.PORT || 3000
 
-app.listen(PORT)
+sequelize.sync()
+	.then(result => {
+		// console.log(result)
+		app.listen(PORT)
+	})
+	.catch(err => console.log('Sequelize Sync error:', err))
+
