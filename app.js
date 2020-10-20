@@ -2,8 +2,8 @@ const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 
-
 const errorsController = require('./controllers/errors')
+const db = require('./config/database')
 
 const app = express()
 
