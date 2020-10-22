@@ -1,4 +1,3 @@
-const Product = require('../models/product')
 
 exports.getAddProductPage = (req, res, next) => {
   res.render('admin/edit-product', {
