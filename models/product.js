@@ -1,4 +1,4 @@
-const mongoConnect = require('../config/database')
+const getDb = require('../config/database').getDb
 
 class Product {
 	constructor(title, price, description, imageUrl) {
@@ -8,33 +8,16 @@ class Product {
 		this.imageUrl = imageUrl
 	}
 	save() {
-		
+		const db = getDb()
+		db.collection('products').insertOne(this)
+			.then(result => {
+
+		console.log(result)
+	})
+			.catch(err => {
+				console.log(err)
+			})
 	}
 }
-
-const Product = sequelize.define('product', {
-	id: {
-		type: Sequelize.INTEGER,
-		autoIncrement: true, 
-		allowNull: false,
-		primaryKey: true
-	},
-	title: {
-		type: Sequelize.STRING,
-		allowNull: false
-	},
-	price: {
-		type: Sequelize.DOUBLE,
-		allowNull: false
-	},
-	imageUrl: {
-		type: Sequelize.STRING,
-		allowNull: false
-	},
-	description: {
-		type: Sequelize.STRING,
-		allowNull: false
-	},
-})
 
 module.exports = Product

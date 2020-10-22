@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 require('dotenv').config()
 const errorsController = require('./controllers/errors')
 const PORT = process.env.PORT || 3000
-const mongoConnect = require('./config/database')
+const mongoConnect = require('./config/database').mongoConnect
 const app = express()
 
 app.set('view engine', 'ejs')
@@ -32,7 +32,6 @@ app.use('/admin', adminRoutes)
 //app.use('/', shopRoutes)
 
 app.use(errorsController.get404Page)
-mongoConnect((client) => {
-	console.log(client)
+mongoConnect(() => {
 	app.listen(PORT)
 })

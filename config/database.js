@@ -16,5 +16,11 @@ const mongoConnect = callback => {
 		throw err;
 	})
 }
-
-module.exports = mongoConnect
+const getDb = () => {
+	if (_db) {
+		return _db
+	}
+	throw 'No databse found!'
+}
+exports.mongoConnect = mongoConnect
+exports.getDb = getDb
