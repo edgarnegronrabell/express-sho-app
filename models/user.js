@@ -1,7 +1,4 @@
-const mongodb = require('mongodb')
-const getDb = require('../config/database').getDb
-
-const ObjectId = mongodb.ObjectId
+const mongoose = require('mongoose')
 
 class User {
   constructor(username, email, cart, id) {
