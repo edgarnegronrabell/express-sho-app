@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 const errorsController = require('./controllers/errors')
 const PORT = process.env.PORT || 3000
-//const User = require('./models/user')
+const User = require('./models/user')
 const app = express()
 
 app.set('view engine', 'ejs')
@@ -19,16 +19,15 @@ const shopRoutes = require('./routes/shop')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 
-//app.use((req, res, next) => {
-//	User
-//    .findById("5f945edd8f0705a6156c4321")
-//    .then(user => {
-//	//Saves a user as a sequelize object with sequelize methods into the request.
-//		req.user = new User(user.username, user.email, user.cart, user._id)
-//		next()
-//	})
-//	.catch(err => console.log(err))
-//})
+app.use((req, res, next) => {
+	User
+    .findById("5f99c2d77e6b5f0598cb1469")
+    .then(user => {
+			req.user = user
+			next()
+	})
+		.catch(err => console.log(err))
+})
 
 app.use('/admin', adminRoutes)
 app.use('/', shopRoutes)
@@ -37,10 +36,25 @@ app.use(errorsController.get404Page)
 mongoose.connect(
         process.env.MONGO_DB_URI, 
         { useNewUrlParser: true, 
-          useUnifiedTopology: true
+          useUnifiedTopology: true,
+	  useFindAndModify: false 
         })
 	.then(result => {
-    app.listen(PORT)	
-	})
+		User
+			.findOne()
+			.then(user => {
+				if (!user ) {
+          const user = new User({
+          	name: 'EdgarNegronRabell',
+            email: 'edgar.negron.rabell@gmail.com',
+            cart: {
+            	items: []
+            }
+          })
+          user.save()
+				}
+			})
+    	app.listen(PORT)	
+		})
 	.catch(err => console.log(err))
 
