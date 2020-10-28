@@ -45,15 +45,17 @@ exports.getEditProductPage = (req, res, next) => {
 
 exports.editProduct = (req, res, next) => {
   const { productId, title, imageUrl, description, price } = req.body
-  const product = new Product(
-    title,
-    imageUrl,
-    description,
-    price,
-    productId
-  )
-  product
-    .save()
+  
+  Product
+    .findById(productId)
+    .then(product => {
+      product.title = title,
+      product.price = price
+      product.description = description
+      product.imageUrl = imageUrl
+      return product
+        .save()
+    })
     .then(result => {
       console.log('Product Updated Successfully')
       res.redirect('/admin/products')
@@ -62,9 +64,8 @@ exports.editProduct = (req, res, next) => {
 }
 
 exports.getProducts = (req, res, next) => {
-  Product.fetchAll()
+  Product.find()
     .then(products => {
-      console.log('Admin products ', products)
       res.render('admin/products-list', {
         prods: products,
         pageTitle: 'Admin Products',
