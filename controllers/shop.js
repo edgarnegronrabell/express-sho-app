@@ -99,24 +99,25 @@ exports.postOrder = (req, res, next) => {
       return order.save()
   })
     .then(result => {
-      console.log(result)
+      return req.user.clearCart()
+    }).then(() => {
       res.redirect('/orders')
     })
     .catch(err => console.log(err))
 }
 
 exports.getOrders = (req, res, next) => {
-  req.user
-    .getOrders()
+  Order
+    .find({ "user.userId": req.user._id })
     .then(orders => {
       console.log('Orders:', orders)
       res.render('shop/orders', {
         pageTitle: 'Your Orders',
         path: '/orders',
-        orders,
+        orders
       })
     })
-    .catch(err => console.log(err))
+    .catch(err=> console.log(err))
 }
 
 exports.getCheckout = (req, res, next) => {

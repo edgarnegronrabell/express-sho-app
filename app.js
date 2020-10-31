@@ -12,6 +12,7 @@ const app = express()
 app.set('view engine', 'ejs')
 app.set('views', 'views')
 
+const authRoutes = require('./routes/auth')
 const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
 
@@ -29,8 +30,10 @@ app.use((req, res, next) => {
 		.catch(err => console.log(err))
 })
 
+
 app.use('/admin', adminRoutes)
 app.use('/', shopRoutes)
+app.use(authRoutes)
 
 app.use(errorsController.get404Page)
 mongoose.connect(
