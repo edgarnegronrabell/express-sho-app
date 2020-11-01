@@ -2,12 +2,19 @@ const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const session = require('express-session')
+const MongoDBStore = require('connect-mongodb-session')(session)
 
 require('dotenv').config()
 const errorsController = require('./controllers/errors')
 const PORT = process.env.PORT || 3000
 const User = require('./models/user')
+
 const app = express()
+const store = new MongoDBStore({
+	uri: process.env.MONGO_DB_URI,
+	collection: 'sessions'
+})
 
 app.set('view engine', 'ejs')
 app.set('views', 'views')
@@ -19,16 +26,12 @@ const shopRoutes = require('./routes/shop')
 //Middleware
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
-
-app.use((req, res, next) => {
-	User
-    .findById("5f99c2d77e6b5f0598cb1469")
-    .then(user => {
-			req.user = user
-			next()
-	})
-		.catch(err => console.log(err))
-})
+app.use(session({ 
+	secret: process.env.SECRET, 
+	resave: false, 
+	saveUninitializedValue: false, 
+	store })
+)
 
 
 app.use('/admin', adminRoutes)
