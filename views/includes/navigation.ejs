@@ -41,6 +41,11 @@
 					Login
 				</a>
 			</div>
+			<div class="main-header__item">
+				<a class="<%= path === '/signup' ? 'active' : '' %>" href="/signup">
+					Sign Up
+				</a>
+			</div>
 		<% } else { %>
 			<div class="main-header__item-list">
 				<form action="/logout" method="POST">

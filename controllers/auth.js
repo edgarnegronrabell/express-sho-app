@@ -21,6 +21,27 @@ exports.postLogin = (req, res, next) => {
     .catch(err => console.log(err))
 }
 
+exports.getSignupPage = (req, res, next) => {
+  res.render('auth/signup', {
+    path: '/signup',
+    pageTitle: 'Sign Up',
+    isAuthenticated: req.session.isLoggedIn,
+  })
+}
+
+exports.postSignup = (req, res, next) => {
+  const { email, password, confirmPassword } = req.body
+  
+}
+
+exports.getLoginPage = (req, res, next) => {
+  res.render('auth/login', {
+    path: '/login',
+    pageTitle: 'Login',
+    isAuthenticated: req.session.isLoggedIn,
+  })
+}
+
 exports.logout = (req, res, next) => {
   req.session.destroy(err => {
     console.log(err)
