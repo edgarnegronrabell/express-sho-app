@@ -59,18 +59,6 @@ mongoose
     useFindAndModify: false,
   })
   .then(result => {
-    User.findOne().then(user => {
-      if (!user) {
-        const user = new User({
-          name: 'EdgarNegronRabell',
-          email: 'edgar.negron.rabell@gmail.com',
-          cart: {
-            items: [],
-          },
-        })
-        user.save()
-      }
-    })
     app.listen(PORT)
   })
   .catch(err => console.log(err))
