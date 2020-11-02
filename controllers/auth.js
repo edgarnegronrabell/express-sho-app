@@ -17,13 +17,22 @@ exports.postLogin = (req, res, next) => {
 			if (!user) {
 				return res.redirect('/login')
 			}
-			bcrypt
-      req.session.isLoggedIn = true
-      req.session.user = user
-      return req.session.save(err => {
-        console.log(err)
-        res.redirect('/')
-      })
+        bcrypt
+        .compare(password, user.password)
+        .then(doMatch => {
+          if(doMatch) {
+            req.session.isLoggedIn = true
+            req.session.user = user
+            return req.session.save(err => {
+              console.log(err)
+             return res.redirect('/')
+            })
+          }
+        })
+        .catch(err => {
+          console.log(err)
+          res.redirect('/')
+        })
     })
     .catch(err => console.log(err))
 }
