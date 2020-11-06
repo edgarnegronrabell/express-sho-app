@@ -4,7 +4,10 @@
 </head>
 <body>
   <%- include('../includes/navigation.ejs') %>
-  <main>
+	<main>
+		<% if (errorMessage.length > 0) {  %>
+			<div class="user-message user-message--error"><%= errorMessage %> </div>
+		<% } %>
 		<form class="signup-form" action="/signup" method="POST">
 				<div class="form-control">
 					<label for="username">Username</label>

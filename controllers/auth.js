@@ -1,13 +1,20 @@
 const bcrypt = require('bcryptjs')
+const nodemailer = require('nodemailer')
+const sendgridTransport = require('nodemailer-sendgrid-transport')
 
 const User = require('../models/user')
+
+const transporter = nodemailer.createTransport(sendgridTransport({
+	auth : {
+		api_key: process.env.API_KEY
+	}
+})) 
 
 exports.getLoginPage = (req, res, next) => {
   res.render('auth/login', {
     path: '/login',
 		pageTitle: 'Login',
 		errorMessage: req.flash('error')
-		
   })
 }
 
@@ -26,10 +33,12 @@ exports.postLogin = (req, res, next) => {
             req.session.isLoggedIn = true
             req.session.user = user
             return req.session.save(err => {
-              console.log(err)
-             return res.redirect('/')
+            
+              return res.redirect('/')
             })
           }
+					req.flash('error', 'Invalid email or password')
+					res.redirect('/login')
         })
         .catch(err => {
           console.log(err)
@@ -43,6 +52,7 @@ exports.getSignupPage = (req, res, next) => {
   res.render('auth/signup', {
     path: '/signup',
     pageTitle: 'Sign Up',
+		errorMessage: req.flash('error')
   })
 }
 
@@ -51,6 +61,7 @@ exports.postSignup = (req, res, next) => {
   User.findOne({ email })
     .then(userDoc => {
       if (userDoc) {
+				req.flash('error', 'Email is being used already. Please pick a different one.')
         return res.redirect('/signup')
       }
       return bcrypt
@@ -66,6 +77,13 @@ exports.postSignup = (req, res, next) => {
         })
         .then(result => {
           res.redirect('/login')
+					return transporter.sendMail({
+						to: email,
+						from: 'edgar.negron.rabell@gmail.com',
+						subject: 'Sign up Successfull!',
+						html: '<h1>You\'ve signed up successfully</h1>'
+					})
+						.catch(err => console.log(err))
         })
         .catch(err => console.log(err))
     })
@@ -76,6 +94,7 @@ exports.getLoginPage = (req, res, next) => {
   res.render('auth/login', {
     path: '/login',
     pageTitle: 'Login',
+		errorMessage: req.flash('error')
   })
 }
 
