@@ -33,8 +33,8 @@ app.use(
   session({
     secret: process.env.SECRET,
     resave: false,
-    saveUninitializedValue: false,
-    store,
+    saveUninitializedValue: true,
+    store
   })
 )
 

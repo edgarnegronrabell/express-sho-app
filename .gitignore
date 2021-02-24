@@ -1,8 +1,10 @@
 .nyc_output/
 coverage/
-node_modules/
+node_modules/*
 npm-debug.log
 package-lock.json
 test/*.logsynthwave84
 .*.swp
 .*.swo
+
+node_modules/
