@@ -12,9 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: npm install and run server
-      run: |
-        npm ci
-        npm run start-server
+        run: |
+          npm ci
+          npm run start-server
       - uses: actions/upload-artifact@main
         with:
           name: webpack artifacts
