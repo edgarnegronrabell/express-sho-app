@@ -4,16 +4,16 @@ exports.getAddProductPage = (req, res, next) => {
   res.render('admin/edit-product', {
     pageTitle: 'Add Product',
     path: '/admin/add-product',
-    editing: false,
+    editing: false
   })
 }
 
 exports.postProduct = (req, res, next) => {
   const { title, imageUrl, description, price } = req.body
-  const product = new Product({ 
-    title, 
-    price, 
-    description, 
+  const product = new Product({
+    title,
+    price,
+    description,
     imageUrl,
     userId: req.user
   })
@@ -43,7 +43,7 @@ exports.getEditProductPage = (req, res, next) => {
         product: product,
         pageTitle: 'Edit Product',
         path: '/admin/edit-product',
-        editing: editMode,
+        editing: editMode
       })
     })
     .catch(err => console.log(err))
@@ -51,7 +51,7 @@ exports.getEditProductPage = (req, res, next) => {
 
 exports.editProduct = (req, res, next) => {
   const { productId, title, imageUrl, description, price } = req.body
-  
+
   Product
     .findById(productId)
     .then(product => {
@@ -77,7 +77,7 @@ exports.getProducts = (req, res, next) => {
       res.render('admin/products-list', {
         prods: products,
         pageTitle: 'Admin Products',
-        path: '/admin/products',
+        path: '/admin/products'
       })
     })
     .catch(err => console.log(err))

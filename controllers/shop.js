@@ -7,7 +7,7 @@ exports.getIndex = (req, res, next) => {
       res.render('shop/index', {
         prods: products,
         pageTitle: 'Shop',
-        path: '/',
+        path: '/'
       })
     })
     .catch(err => console.log(err))
@@ -20,7 +20,7 @@ exports.getProducts = (req, res, next) => {
       res.render('shop/product-list', {
         prods: products,
         pageTitle: 'All Products',
-        path: '/products',
+        path: '/products'
       })
     })
     .catch(err => console.log(err))
@@ -34,12 +34,11 @@ exports.getProduct = (req, res, next) => {
       res.render('shop/product-detail', {
         product,
         pageTitle: product.title,
-        path: '/products',
+        path: '/products'
       })
     })
     .catch(err => console.log(err))
 }
-
 
 exports.getCart = (req, res, next) => {
   console.log(req.session)
@@ -51,7 +50,7 @@ exports.getCart = (req, res, next) => {
       res.render('shop/cart', {
         pageTitle: 'Your Cart',
         path: '/cart',
-        products: user.cart.items,
+        products: user.cart.items
       })
     })
     .catch(err => console.log(err))
@@ -97,9 +96,9 @@ exports.postOrder = (req, res, next) => {
           userId: req.user
         },
         products: products
-    })
+      })
       return order.save()
-  })
+    })
     .then(result => {
       return req.user.clearCart()
     }).then(() => {
@@ -110,21 +109,21 @@ exports.postOrder = (req, res, next) => {
 
 exports.getOrders = (req, res, next) => {
   Order
-    .find({ "user.userId": req.user._id })
+    .find({ 'user.userId': req.user._id })
     .then(orders => {
       console.log('Orders:', orders)
       res.render('shop/orders', {
         pageTitle: 'Your Orders',
         path: '/orders',
-        orders,
+        orders
       })
     })
-    .catch(err=> console.log(err))
+    .catch(err => console.log(err))
 }
 
 exports.getCheckout = (req, res, next) => {
   res.render('shop/checkout', {
     pageTitle: 'Checkout',
-    path: '/checkout',
+    path: '/checkout'
   })
 }

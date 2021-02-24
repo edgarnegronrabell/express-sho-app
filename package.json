@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js",
-    "start-server": "node app.js",
-    "test": "jest"
+    "server": "node app.js",
+    "test": "npx jest"
   },
   "keywords": [],
   "author": "Edgar Negron",
