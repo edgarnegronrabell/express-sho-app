@@ -14,7 +14,7 @@ jobs:
       - name: npm install and run server
         run: |
           npm ci
-          npm run start-server
+          npm run build
       - uses: actions/upload-artifact@main
         with:
           name: webpack artifacts
