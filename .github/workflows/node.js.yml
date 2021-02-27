@@ -15,7 +15,7 @@ jobs:
         run: |
           npm ci
           npm run server
-
+          npm build --if-present
   test:
     needs: build 
     runs-on: ubuntu-latest
