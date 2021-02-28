@@ -23,10 +23,11 @@ jobs:
       - name: npm install and test
         run: |
           npm ci
+          npm run server
           npm test
         env:
           CI: true
-          
+
   deploy:
     needs: [test]
     runs-on: ubuntu-latest
