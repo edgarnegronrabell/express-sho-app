@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "server": "node app.js",
+    "start": "node app.js",
+    "server": "nodemon app.js",
     "test": "npx jest"
   },
   "keywords": [],
@@ -26,11 +26,11 @@
     "mysql2": "^2.2.5",
     "nodemailer": "^6.4.15",
     "nodemailer-sendgrid-transport": "^0.2.0",
-    "nodemon": "^2.0.4",
     "sequelize": "^6.3.5"
   },
   "devDependencies": {
     "axios": "^0.21.1",
-    "jest": "^26.6.3"
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.7"
   }
 }

@@ -5,3 +5,9 @@ npm-debug.log
 test/*.logsynthwave84
 .*.swp
 .*.swo
+
+.env
+/node_modules
+npm-debug.log
+.DS_Store
+/*.env
