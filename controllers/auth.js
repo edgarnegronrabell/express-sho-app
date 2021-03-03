@@ -9,8 +9,8 @@ const User = require('../models/user')
 const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
-      api_key: process.env.API_KEY,
-    },
+      api_key: process.env.API_KEY
+    }
   })
 )
 
@@ -18,7 +18,7 @@ exports.getLoginPage = (req, res, next) => {
   res.render('auth/login', {
     path: '/login',
     pageTitle: 'Login',
-    errorMessage: req.flash('error'),
+    errorMessage: req.flash('error')
   })
 }
 
@@ -55,7 +55,7 @@ exports.getSignupPage = (req, res, next) => {
   res.render('auth/signup', {
     path: '/signup',
     pageTitle: 'Sign Up',
-    errorMessage: req.flash('error'),
+    errorMessage: req.flash('error')
   })
 }
 
@@ -77,7 +77,7 @@ exports.postSignup = (req, res, next) => {
             username,
             email,
             password: hashedPassword,
-            cart: { items: [] },
+            cart: { items: [] }
           })
           return user.save()
         })
@@ -88,7 +88,7 @@ exports.postSignup = (req, res, next) => {
               to: email,
               from: 'edgar.negron.rabell@gmail.com',
               subject: 'Sign up Successfull!',
-              html: "<h1>You've signed up successfully</h1>",
+              html: "<h1>You've signed up successfully</h1>"
             })
             .catch(err => console.log(err))
         })
@@ -101,7 +101,7 @@ exports.getLoginPage = (req, res, next) => {
   res.render('auth/login', {
     path: '/login',
     pageTitle: 'Login',
-    errorMessage: req.flash('error'),
+    errorMessage: req.flash('error')
   })
 }
 
@@ -116,7 +116,7 @@ exports.getResetPasswordPage = (req, res, next) => {
   res.render('auth/password-reset', {
     path: '/reset',
     pageTitle: 'Reset Password',
-    errorMessage: req.flash('error'),
+    errorMessage: req.flash('error')
   })
 }
 
@@ -151,7 +151,7 @@ exports.postResetPassword = (req, res, next) => {
             html: `
               <p>The following email was requested by the user whose account this belongs to. If you did not request this password reset, please ignore this message</p>
               <p>Click this <a href="http://localhost:3000/reset/${token}">link</a> to reset your password.</p>
-              `,
+              `
           })
           .catch(err => console.log(err))
       })

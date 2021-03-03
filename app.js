@@ -15,7 +15,7 @@ const User = require('./models/user')
 const app = express()
 const store = new MongoDBStore({
   uri: process.env.MONGO_DB_URI,
-  collection: 'sessions',
+  collection: 'sessions'
 })
 const csrfProtection = csrf()
 
@@ -26,7 +26,7 @@ const authRoutes = require('./routes/auth')
 const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
 
-//Middleware
+// Middleware
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(
@@ -42,9 +42,9 @@ app.use(csrfProtection)
 app.use(flash())
 
 app.use((req, res, next) => {
-	if (!req.session.user) {
-		return next()
-	}
+  if (!req.session.user) {
+    return next()
+  }
   User.findById(req.session.user._id)
     .then(user => {
       req.user = user
@@ -68,7 +68,7 @@ mongoose
   .connect(process.env.MONGO_DB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false,
+    useFindAndModify: false
   })
   .then(result => {
     app.listen(PORT)

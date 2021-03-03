@@ -2,9 +2,12 @@
 coverage/
 node_modules/*
 npm-debug.log
-package-lock.json
 test/*.logsynthwave84
 .*.swp
 .*.swo
 
-node_modules/
+.env
+/node_modules
+npm-debug.log
+.DS_Store
+/*.env
